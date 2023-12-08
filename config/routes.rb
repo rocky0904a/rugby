@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   
-  get 'blogs/index'=>'blogs#index'
+  
   resources :blogs
  
 
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   
   resources :calenders
   
-  resources :comments
+  
   root 'posts#index'
 
   
