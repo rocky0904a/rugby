@@ -1,0 +1,39 @@
+<h1></h1>
+<p>名前 : <%= @user.name %></p>
+<p>自己紹介 : <%= @user.profile %></p>
+<%= image_tag @user.image_url, size: "250x200" if @user.image? %>
+<% if current_user.id == @user.id %>
+  <%= link_to "プロフィールを編集する", edit_user_registration_path %>
+<% end %>
+<div class="user-in">
+
+
+<% if @user.id == current_user.id %>
+    <%= @msg %>
+<% else %>
+    <% if @isRoom == true %>
+        <%= link_to 'DMへ', room_path(@roomId) %>
+    <% else %>
+        <%= form_for @room do |f| %>
+            <%= fields_for @entry do |e|%>
+                <% e.hidden_field :user_id, value: @user.id %>
+            <% end %>
+        <%= f.submit "DMを開始する"%>
+        <% end %>
+    <% end %>
+<% end %>
+</div>
+
+
+
+
+<% @user.posts.each do |t| %>
+    <%= t.user.email %>
+    <%= t.rugby_title %>
+    <%= t.rugby_content %>
+    
+<% end %>
+
+<%= link_to "ユーザー一覧へ", users_path %>
+<%= link_to "新規投稿へ", posts_path %>
+<%= link_to "投稿一覧に戻る", posts_path %>

@@ -1,0 +1,23 @@
+<h1></h1>
+<h3></h3>
+<div class="posts-container">
+<% if user_signed_in? %>
+  <%= link_to "マイページへ", user_path(current_user.id) %>
+  <%= link_to "新規投稿へ", new_post_path %>
+  
+<% end %>
+  <% @posts.each do |t| %>
+    
+    <div class="post">
+    <%= t.user.email %>
+    <%= image_tag t.image_url, size: "250x200" if t.image? %>
+      <%= t.rugby_title %>
+      <%= t.rugby_content %>
+      <%= link_to "詳細へ", post_path(t.id) %>
+      <%= link_to "編集する", edit_post_path(t.id) %>
+      <%= button_to "削除する", post_path(t.id), method: :delete %>
+      <%= link_to t.user.name, user_path(t.user.id) %> 
+     <%= t.user.email %>
+    </div>
+  <% end %>
+</div>
